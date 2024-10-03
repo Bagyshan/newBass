@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 8153
+      POSTGRES_DB: bass2bass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./path/to/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  web:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile
+    ports:
+      - "8000:8000"
+    command: ["./wait-for-it.sh", "db:5432", "--", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
