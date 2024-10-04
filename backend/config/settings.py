@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kbk#n-iwx*kgmqhc$_p5m69u$)gl^8v)yb!ivy%(04qe+ar98p'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS').split()
 
 
 # Application definition
@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     #apps
-    'api.users',
-    'api.posts'
+    'src.users',
+    'src.posts'
 ]
 
 MIDDLEWARE = [
@@ -94,11 +94,11 @@ SIMPLE_JWT = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "bass2bass",
-        "USER": "bagyshan",
-        "PASSWORD": "1",
-        "HOST": 'localhost',
-        "PORT": 5432,
+        'NAME':config('DB_NAME'),
+        'USER':config('DB_USER'),
+        'PASSWORD':config('DB_PASS'),
+        'HOST':config('DB_HOST'),
+        'PORT':config('DB_PORT')
     }
 }
 MEDIA_URL = '/media/'
@@ -138,7 +138,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'api/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'api/static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
