@@ -19,6 +19,13 @@ class UserLoginView(generics.GenericAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.AllowAny]
 
+    def options(self, request, *args, **kwargs):
+        response = Response(status=status.HTTP_204_NO_CONTENT)
+        response['Access-Control-Allow-Origin'] = '*'
+        response['Access-Control-Allow-Methods'] = 'OPTIONS, POST'
+        response['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
+        return response
+
     @swagger_auto_schema(request_body=UserSerializer)
     def post(self, request, *args, **kwargs):
         email = request.data.get('email')
