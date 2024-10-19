@@ -192,7 +192,7 @@ JAZZMIN_UI_TWEAKS = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000/", "http://*", "https://*", "http://localhost:*", "https://localhost:*", "https://*", "https://localhost:3000"
+    "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*", "https://*", "https://localhost:3000"
 ]
 
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
