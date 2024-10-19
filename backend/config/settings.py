@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #libs
     'drf_yasg',
+    'corsheaders',
     'rest_framework',
     #apps
     'src.users',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -189,3 +191,24 @@ JAZZMIN_UI_TWEAKS = {
     },
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*", "https://*", "https://kyrgyzgeology.kg", "https://www.kyrgyzgeology.kg", "https://localhost:3000"
+]
+
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+
+CORS_ALLOW_HEADERS = [
+    'Accept',
+    'Accept-Encoding',
+    'Authorization',
+    'Content-Type',
+    'DNT',
+    'Origin',
+    'User-Agent',
+    'X-CSRFToken',
+    'X-Requested-With',
+]
+
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
