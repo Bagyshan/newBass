@@ -32,6 +32,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS').split()
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #libs
     'drf_yasg',
-    'corsheaders',
     'rest_framework',
     #apps
     'src.users',
@@ -192,7 +192,7 @@ JAZZMIN_UI_TWEAKS = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*", "https://*", "https://kyrgyzgeology.kg", "https://www.kyrgyzgeology.kg", "https://localhost:3000"
+    "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*", "https://*", "https://localhost:3000"
 ]
 
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
