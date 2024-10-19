@@ -191,14 +191,38 @@ JAZZMIN_UI_TWEAKS = {
     },
 }
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*", "https://*", "https://localhost:3000"
+# ]
+
+# CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+
+# CORS_ALLOW_HEADERS = [
+#     'Access-Control-Allow-Origin',
+#     'Accept',
+#     'Accept-Encoding',
+#     'Authorization',
+#     'Content-Type',
+#     'DNT',
+#     'Origin',
+#     'User-Agent',
+#     'X-CSRFToken',
+#     'X-Requested-With',
+# ]
+
+
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_ALLOW_ALL = True
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", "http://*", "https://*", "http://localhost:*", "https://localhost:*", "https://*", "https://localhost:3000"
+    "http://localhost:3000",
+    "https://localhost:3000",
+    # Укажите здесь другие конкретные источники, если необходимо
 ]
 
 CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 
 CORS_ALLOW_HEADERS = [
-    'Access-Control-Allow-Origin',
     'Accept',
     'Accept-Encoding',
     'Authorization',
@@ -210,6 +234,7 @@ CORS_ALLOW_HEADERS = [
     'X-Requested-With',
 ]
 
-
 CORS_ALLOW_CREDENTIALS = True
-# CORS_ORIGIN_ALLOW_ALL = True
+
+# Убедитесь, что это выключено, если используете `CORS_ALLOWED_ORIGINS`
+CORS_ORIGIN_ALLOW_ALL = False
