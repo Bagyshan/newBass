@@ -56,6 +56,7 @@ services:
     volumes:
       - ./nginx/nginx-local.conf:/etc/nginx/conf.d/nginx-local.conf
       - static_volume:/usr/src/app/api/static
+      - media_volume:/usr/src/app/api/media
     depends_on:
       - backend
     networks:

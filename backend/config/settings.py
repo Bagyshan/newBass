@@ -103,8 +103,8 @@ DATABASES = {
         'PORT':config('DB_PORT')
     }
 }
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'api/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'api/media')
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
