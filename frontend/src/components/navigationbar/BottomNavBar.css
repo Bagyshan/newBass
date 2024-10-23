@@ -1,0 +1,44 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px; 
+  background-color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top-left-radius: 20px; 
+  border-top-right-radius: 20px; 
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; 
+}
+
+.nav-icon {
+  flex: 1;
+  text-align: center;
+}
+
+.homeimg {
+  width: 40px; 
+  height: 40px; 
+  cursor: pointer;
+}
+
+.addimg {
+  width: 37px; 
+  height: 36px;
+  cursor: pointer;
+}
+
+.favoriteimg {
+  width: 25px;
+  height: 27px; 
+  cursor: pointer;
+}
+
+.profileimg {
+  width: 28px; 
+  height: 30px; 
+  cursor: pointer;
+}

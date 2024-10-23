@@ -1,0 +1,132 @@
+
+@media only screen and (max-width: 768px) {
+ .event-card-container {
+  display: flex;
+  overflow-x: auto; 
+  gap: 16px; 
+  padding: 20px;
+}
+
+.event_card {
+  flex: 0 0 auto; 
+  width: 90%;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-image {
+  width: 93%;
+  height: 172px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  position: relative;
+  margin-bottom: 12px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+}
+.event-img{
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .event_card {
+    width: 90%;
+    height: 90%;
+    margin: 20px auto;
+  }
+}
+  
+  .price-container {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  .favorite-icon-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #fff;
+    border-radius: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .favorite-icon {
+    width: 18px !important;
+    height: 18px !important
+  }
+  
+
+  .category {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .category-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+
+  .description {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .details {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .details-item {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .details-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+  }
+
+  .book-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #24b0ac;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+
+  .book-button:hover {
+    background-color: #1a857d;
+  }
+}
