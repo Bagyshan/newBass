@@ -5,7 +5,9 @@ import { KEY_REFRESH_TOKEN, KEY_TOKEN, KEY_USER } from './general';
 const instance = axios.create({
   baseURL: 'http://34.46.230.115/api/',
 });
-
+const axiosInstance = axios.create({
+    baseURL: 'http://34.46.230.115/api/',
+  });
 // Интерсептор для добавления токена в заголовок запроса
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem(KEY_TOKEN);
@@ -21,7 +23,7 @@ export const register = createAsyncThunk(
     "api/register",
     async ({user, navigateToLogin}, { rejectWithValue}) => {
         try {
-            const response = await axios.post(`http://34.46.230.115/api/register/`,user);
+            const response = await axiosInstance.post(`http://34.46.230.115/api/register/`,user);
             navigateToLogin();
             return response.data;
         } catch (error) {
@@ -39,7 +41,7 @@ export const login = createAsyncThunk(
         //     formData.append('password', user.password);
         try {
             
-            const response = await axios.post(`http://34.46.230.115/api/login/`, {
+            const response = await axiosInstance.post(`http://34.46.230.115/api/login/`, {
                 email: user.email,
                 password: user.password
             });
