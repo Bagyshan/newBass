@@ -2,9 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 import { KEY_REFRESH_TOKEN, KEY_TOKEN, KEY_USER } from './general';
 // Создаем экземпляр Axios
-const instance = axios.create({
-  baseURL: 'http://34.46.230.115/api/',
-});
+// const instance = axios.create({
+//   baseURL: 'http://34.46.230.115/api/',
+// });
+const apiUrl = process.env.REACT_APP_API_URL;
+export const instance = axios.create({
+    baseURL: apiUrl,
+})
 
 // Интерсептор для добавления токена в заголовок запроса
 instance.interceptors.request.use((config) => {
