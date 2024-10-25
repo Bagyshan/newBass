@@ -1,12 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 import { KEY_REFRESH_TOKEN, KEY_TOKEN, KEY_USER } from './general';
-// Создаем экземпляр Axios
-// const instance = axios.create({
-//   baseURL: 'http://34.46.230.115/api/',
-// });
 const apiUrl = process.env.REACT_APP_API_URL;
 export const instance = axios.create({
+    baseURL: apiUrl,
+})
+export const axiosInstance = axios.create({
     baseURL: apiUrl,
 })
 
@@ -25,7 +24,7 @@ export const register = createAsyncThunk(
     "api/register",
     async ({user, navigateToLogin}, { rejectWithValue}) => {
         try {
-            const response = await axios.post(`http://34.46.230.115/api/register/`,user);
+            const response = await axiosInstance.post(`api/register/`,user);
             navigateToLogin();
             return response.data;
         } catch (error) {
@@ -43,7 +42,7 @@ export const login = createAsyncThunk(
         //     formData.append('password', user.password);
         try {
             
-            const response = await axios.post(`http://34.46.230.115/api/login/`, {
+            const response = await axiosInstance.post(`/api/login/`, {
                 email: user.email,
                 password: user.password
             });
