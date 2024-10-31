@@ -19,10 +19,10 @@ const MapsMainPage = () => {
   const [selectedCategory, setSelectedCategory] = useState(0)
   const [visiblePosts,setVisiblePosts] = useState([])
   const colorOfCategory = {
-    1:"",
-    2:"",
-    3:"",
-    4:""
+    1:"#A66E38",
+    2:"#FFAD60",
+    3:"#FFEEAD",
+    4:"#96CEB4"
   }
   const navigate = useNavigate()
   
@@ -170,7 +170,7 @@ const MapsMainPage = () => {
         <GeolocationMarker/>
         {/* Отображаем маркеры для каждого мероприятия */}
         {visiblePosts.map((post) => (
-          <Marker key={post.id} position={[post.latitude, post.longitude]}>
+          <Marker key={post.id} position={[post.latitude, post.longitude]} icon={createCustomIcon(colorOfCategory[post?.category])}>
             <Popup>
               
               <img style={{width:"100%"}}src={post?.image}/> <br/>
