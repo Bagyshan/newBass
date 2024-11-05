@@ -33,20 +33,6 @@ const UserProfilePage = () => {
             <img src={placeicon} alt="Location" className="location-icon" />
             <span className="location">Город</span>
           </div>
-          <div className="stats">
-            <div className="subscriptions">
-              <span className="count">123</span>
-              <span className="label">Подписки</span>
-            </div>
-            <div className="followers">
-              <span className="count">456</span>
-              <span className="label">Подписчики</span>
-            </div>
-          </div>
-        </div>
-        <div className="action-buttons">
-          <button className="btn event-btn">Создать событие</button>
-          <button className="btn invite-btn">Пригласить друзей</button>
         </div>
       </div>
       <hr className="divider" />

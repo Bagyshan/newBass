@@ -3,7 +3,7 @@ import './MapsMainPage.css';
 import { MapContainer, TileLayer, Marker, useMapEvents, Popup, useMap, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategories, getPosts, getPostsByCategory } from '../../store/apiSlice';
+import { getCategories, getCurrentUser, getPosts, getPostsByCategory } from '../../store/apiSlice';
 import plusIcon from '../../assets/plus.png'
 import gpsIcon from '../../assets/gps.svg'
 import L from 'leaflet';
@@ -14,20 +14,29 @@ const MapsMainPage = () => {
   const [showPopup, setShowPopup] = useState(false); // Состояние для управления видимостью попапа
   const [position, setPosition] = useState(null); // Состояние для хранения координат клика
   const popupRef = useRef(null); // Ссылка на контейнер попапа
-  const {posts, categories, postsByCategory} = useSelector((state) => state.api)
+  const {posts, categories, postsByCategory, currentUser} = useSelector((state) => state.api)
   const [flyToPosition,setFlyToPosition] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(0)
   const [visiblePosts,setVisiblePosts] = useState([])
+  const colorOfCategory = {
+    1:"#A66E38",
+    2:"#FFAD60",
+    3:"#FFEEAD",
+    4:"#96CEB4"
+  }
   const navigate = useNavigate()
+  
   useEffect(() => {
     // Получаем посты и категории при первой загрузке компонента
     dispatch(getPosts());
     dispatch(getCategories());
+    dispatch(getCurrentUser())
   }, [dispatch]);
   
   useEffect(() => {
     // Устанавливаем видимые посты при изменении всех постов
     setVisiblePosts(posts);
+    console.log(currentUser)
   }, [posts]);
   
   useEffect(() => {
@@ -161,7 +170,7 @@ const MapsMainPage = () => {
         <GeolocationMarker/>
         {/* Отображаем маркеры для каждого мероприятия */}
         {visiblePosts.map((post) => (
-          <Marker key={post.id} position={[post.latitude, post.longitude]}>
+          <Marker key={post.id} position={[post.latitude, post.longitude]} icon={createCustomIcon(colorOfCategory[post?.category])}>
             <Popup>
               
               <img style={{width:"100%"}}src={post?.image}/> <br/>
@@ -185,7 +194,8 @@ const MapsMainPage = () => {
           ))}
         </select>
         {/* Отображаем маркер для текущего клика и попап */}
-        {position && (
+        {currentUser.user_type !== 'regular' && (
+          position && (
             <Marker position={position} icon={addIcon}>
               <Popup>
                 <div ref={popupRef}>
@@ -195,6 +205,7 @@ const MapsMainPage = () => {
                 </div>
               </Popup>
             </Marker>
+        )
         )}
       </MapContainer>
     </div>
