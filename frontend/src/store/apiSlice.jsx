@@ -24,7 +24,7 @@ export const register = createAsyncThunk(
     "api/register",
     async ({user, navigateToLogin}, { rejectWithValue}) => {
         try {
-            const response = await axiosInstance.post(`api/register/`,user);
+            const response = await axiosInstance.post(`register/`,user);
             navigateToLogin();
             return response.data;
         } catch (error) {
@@ -42,7 +42,7 @@ export const login = createAsyncThunk(
         //     formData.append('password', user.password);
         try {
             
-            const response = await axiosInstance.post(`/api/login/`, {
+            const response = await axiosInstance.post(`login/`, {
                 email: user.email,
                 password: user.password
             });
