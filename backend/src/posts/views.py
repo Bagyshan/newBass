@@ -20,10 +20,13 @@ class PostDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
 
     def get_queryset(self):
-        user = self.request.user
-        if user.is_authenticated:
-            return Post.objects.filter(creator=user)
-        return Post.objects.none() 
+        if self.request.method == 'GET':
+            return Post.objects.all()
+        else:
+            user = self.request.user
+            if user.is_authenticated:
+                return Post.objects.filter(creator=user)
+            return Post.objects.none() 
 
 class PostListView(generics.ListAPIView):
     queryset = Post.objects.all()
