@@ -8,7 +8,7 @@
     justify-content: center;
     height: 100%;
     padding: 20px;
-    overflow-y: auto;
+    padding-bottom: 60px;
 }
 
 .logo {
