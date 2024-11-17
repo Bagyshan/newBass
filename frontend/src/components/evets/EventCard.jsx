@@ -8,25 +8,39 @@ import cardimg from '../../assets/Rectangle 2540.png';
 import artimg from '../../assets/Vector (11).png';
 import qaicon from '../../assets/help.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCategories, getPost } from '../../store/apiSlice';
+import { addToFavorites, deleteFromFavorites, getCategories, getCurrentUser, getFavorites, getPost } from '../../store/apiSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const EventCard = () => {
   const [isBooked, setIsBooked] = useState(false);
   const dispatch = useDispatch();
+  const [isFavorite,setIsFavorite] = useState(false)
   const navigate = useNavigate()
-  const {eventId} = useParams()
-  const {isLoading, post, categories} = useSelector(state=> state.api) 
+  const {eventId} = useParams(); 
+  const {isLoading, post, categories, currentUser, favorites} = useSelector(state=> state.api) 
   useEffect(()=>{
     dispatch(getPost(eventId))
     dispatch(getCategories())
+    dispatch(getCurrentUser())
+    dispatch(getFavorites())
   },[dispatch])
   useEffect(()=>{
-    console.log(post)
-    console.log(categories)
-  },[post])
-  const handleBookClick = () => {
+    favorites.map((favorite) => {
+      console.log(favorite)
+      if(favorite.post == eventId) {
+        setIsFavorite(true)
+      }
+    })  
+  },[favorites])
+  const handleAddToFavorites = async() => {
     setIsBooked(true);
+    await dispatch(addToFavorites({user: currentUser.id, post: eventId}))
+    window.location.reload();
+  };
+  const handleDeleteFromFavorites = async() => {
+    setIsBooked(true);
+    await dispatch(deleteFromFavorites(eventId))
+    window.location.reload();
   };
   const eventTime = (post.event_date)?.split('T')
   return (
@@ -58,9 +72,17 @@ const EventCard = () => {
           подробнее…
         </div> */}
       </div>
-      <button className="book-button" onClick={handleBookClick}>
-        {isBooked ? 'Забронировано' : 'Забронировать'}
-      </button>
+      {isFavorite ? (
+        <button className="book-button" style={{backgroundColor:"#FA7979"}} onClick={handleDeleteFromFavorites}>
+            Удалить из избранных
+        </button>      
+      ): (
+        currentUser && (
+          <button className="book-button" onClick={handleAddToFavorites}>
+            Добавить в избранное
+          </button>
+        )
+      )}
       <button className="book-button" onClick={() => navigate("/mapsmainpage")}>
         На карту
       </button>

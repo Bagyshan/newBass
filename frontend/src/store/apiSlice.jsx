@@ -73,7 +73,7 @@ export const getCategories = createAsyncThunk(
     "api/getCategories",
     async (_, { rejectWithValue}) => {
         try {
-            const response = await instance.get(`/categories/`);
+            const response = await axiosInstance.get(`/categories/`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -122,7 +122,7 @@ export const getPosts = createAsyncThunk(
     "api/getPosts",
     async (_, { rejectWithValue}) => {
         try {
-            const response = await instance.get(`/posts/`);
+            const response = await axiosInstance.get(`/posts/`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -134,7 +134,7 @@ export const getPostsByCategory = createAsyncThunk(
     "api/getPostsByCategory",
     async (categoryId, { rejectWithValue}) => {
         try {
-            const response = await instance.get(`/posts/by-category/${categoryId}`);
+            const response = await axiosInstance.get(`/posts/by-category/${categoryId}`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -147,7 +147,7 @@ export const getPostsByDate = createAsyncThunk(
     "api/getPostsByDate",
     async (_, { rejectWithValue}) => {
         try {
-            const response = await instance.get(`/posts/by-date`);
+            const response = await axiosInstance.get(`/posts/by-date`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -159,7 +159,7 @@ export const getPost = createAsyncThunk(
     "api/getPost",
     async (postId, { rejectWithValue}) => {
         try {
-            const response = await instance.get(`/posts/${postId}`);
+            const response = await axiosInstance.get(`/posts/${postId}`);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -178,6 +178,30 @@ export const createPost = createAsyncThunk(
         } catch (error) {
             console.log(error);
             console.log(newPost)
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const addToFavorites = createAsyncThunk(
+    "api/addToFavorites",
+    async (event, { rejectWithValue}) => {
+        try {
+            const response = await instance.post(`/favorites/add/`, event);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            return rejectWithValue(error.message);
+        }
+    }
+);
+export const deleteFromFavorites = createAsyncThunk(
+    "api/deleteFromFavorites",
+    async (postId, { rejectWithValue}) => {
+        try {
+            const response = await instance.delete(`/favorites/delete/${postId}/`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
             return rejectWithValue(error.message);
         }
     }
@@ -274,6 +298,7 @@ const apiSlice = createSlice({
             })
             .addCase(getCurrentUser.rejected, (state, action) => {
                 state.loading = false;
+                state.currentUser = false;
                 state.error = action.payload;
             })
             .addCase(getCategories.pending, (state) => {
@@ -307,6 +332,28 @@ const apiSlice = createSlice({
                 state.loading = false;
             })
             .addCase(register.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(addToFavorites.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(addToFavorites.fulfilled, (state, { payload }) => {
+                state.loading = false;
+            })
+            .addCase(addToFavorites.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(deleteFromFavorites.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(deleteFromFavorites.fulfilled, (state, { payload }) => {
+                state.loading = false;
+            })
+            .addCase(deleteFromFavorites.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             })

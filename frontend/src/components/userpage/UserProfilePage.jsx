@@ -10,16 +10,27 @@ import qaicon from '../../assets/help_outline.png';
 import officon from '../../assets/power_settings_new.png'; 
 import { useDispatch, useSelector } from 'react-redux';
 import { getCurrentUser } from '../../store/apiSlice';
+import { useNavigate } from 'react-router-dom';
+import { KEY_TOKEN, KEY_USER } from '../../store/general';
 
 const UserProfilePage = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const {isLoading, currentUser} = useSelector(state => state.api)
   useEffect(()=>{
     dispatch(getCurrentUser())
   },[dispatch])
-  useEffect(()=>{
-    console.log(currentUser)
-  },[currentUser])
+  const handleLogout= (e)=>{
+    localStorage.removeItem(KEY_TOKEN);
+    localStorage.removeItem(KEY_USER);
+    window.location.reload();
+  }
+  if(!currentUser){
+    return (<div className='user-profile-page' style={{display:"flex", justifyContent:"center", alignItems:"center", height:"100% ", flexDirection:"column"}}> 
+            <p>Войдите в аккаунт</p>
+            <button className="book-button" onClick={()=> navigate(`/sign-in`)}>Войти</button>
+       </div>)
+  }
   return (
     <div className="user-profile-page">
       <div className="profile-container">
@@ -69,7 +80,7 @@ const UserProfilePage = () => {
         <hr className="divider" />
         <div className="profile-link">
           <img src={officon} alt="Logout" className="profile-icon" />
-          <span>Выйти</span>
+          <span onClick={handleLogout}>Выйти</span>
           <span className="arrow"></span>
         </div>
       </div>
