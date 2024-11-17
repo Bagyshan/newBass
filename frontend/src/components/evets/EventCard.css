@@ -5,6 +5,7 @@
   overflow-x: auto; 
   gap: 16px; 
   padding: 20px;
+  padding-bottom: 60px;
 }
 
 .event_card {
