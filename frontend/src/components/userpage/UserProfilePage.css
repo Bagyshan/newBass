@@ -1,6 +1,7 @@
 .user-profile-page {
     padding: 20px;
     font-family: 'Noto Sans', sans-serif;
+    height: 100vh;
   }
   
   .profile-container {
