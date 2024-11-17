@@ -72,9 +72,6 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="site-name">{title}</div>
-      <div className="icons-container">
-        {icons.map((icon) => icon)}
-      </div>
     </nav>
   );
 };

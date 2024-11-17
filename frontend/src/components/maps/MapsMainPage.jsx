@@ -17,6 +17,7 @@ const MapsMainPage = () => {
   const {posts, categories, postsByCategory, currentUser} = useSelector((state) => state.api)
   const [flyToPosition,setFlyToPosition] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(0)
+  const [selectedDate, setSelectedDate] = useState('')
   const [visiblePosts,setVisiblePosts] = useState([])
   const colorOfCategory = {
     1:"#A66E38",
@@ -36,7 +37,6 @@ const MapsMainPage = () => {
   useEffect(() => {
     // Устанавливаем видимые посты при изменении всех постов
     setVisiblePosts(posts);
-    console.log(currentUser)
   }, [posts]);
   
   useEffect(() => {
@@ -56,7 +56,32 @@ const MapsMainPage = () => {
       setVisiblePosts(postsByCategory); // Показываем посты по выбранной категории
     }
   }, [postsByCategory, selectedCategory]);
+  // useEffect(()=>{
+  //   if (selectedDate === ''){
+  //     return;
+  //   }
+  //   // Проверка н а пустую строку не нужна, если проверяем наличие значения
+  //     setVisiblePosts(prev =>
+  //       prev.filter(post => post.event_date?.split("T")[0] === selectedDate)
+  //     );
+  // }, [selectedDate])
+  useEffect(() => {
+    if (selectedDate === '') {
+      // Если дата не выбрана, показываем все посты (либо по категории, либо все)
+      if (Number(selectedCategory) !== 0) {
+        setVisiblePosts(postsByCategory); // Показываем посты по категории
+      } else {
+        setVisiblePosts(posts); // Показываем все посты
+      }
+      return;
+    }
   
+    // Фильтруем исходный массив постов (posts или postsByCategory)
+    setVisiblePosts(() => {
+      const sourcePosts = Number(selectedCategory) !== 0 ? postsByCategory : posts;
+      return sourcePosts.filter(post => post.event_date?.split("T")[0] === selectedDate);
+    });
+  }, [selectedDate, selectedCategory, posts, postsByCategory]);
   
   // Компонент, который обрабатывает клики на карте
   function LocationMarker() {
@@ -140,6 +165,9 @@ const MapsMainPage = () => {
    e.stopPropagation()
     setPosition(null)
   };
+  const handleSelectDate = (e) =>{
+    setSelectedDate(e.target.value)
+  }
   const handleSelectCategory = (e) =>{
     setSelectedCategory(e.target.value)
   }
@@ -193,8 +221,9 @@ const MapsMainPage = () => {
             </option>
           ))}
         </select>
+        <input className='selectDate' type='date' onChange={handleSelectDate}/>
         {/* Отображаем маркер для текущего клика и попап */}
-        {currentUser.user_type !== 'regular' && (
+        {currentUser.user_type == 'vip' && (
           position && (
             <Marker position={position} icon={addIcon}>
               <Popup>

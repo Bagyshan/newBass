@@ -5,18 +5,15 @@ import favoriteicon from '../../assets/Vector (8).png';
 import profileicon from '../../assets/Vector (9).png';
 import './BottomNavBar.css';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const BottomNavBar = () => {
    const navigate = useNavigate();
-
 
   return (
     <div className="bottom-nav">
       <div className="nav-icon">
         <img onClick={()=> navigate('/mapsmainpage')} className='homeimg' src={homeicon} alt="Home" />
-      </div>
-      <div className="nav-icon">
-        <img onClick={()=> navigate('/eventcategorypage')} className='addimg' src={addicon} alt="add" />
       </div>
       <div className="nav-icon">
         <img onClick={()=> navigate('/savedeventspage')} className='favoriteimg' src={favoriteicon} alt="favorite" />
