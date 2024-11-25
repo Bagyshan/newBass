@@ -11,7 +11,7 @@ import SignUp from '../components/registerpage/SignUp';
 import CreatPostPage from '../components/evets/CreatePostPage';
 
 const PUBLIC_ROUTES = [
-  { id: 1, link: "/", element: <WelcomePage /> }, 
+  { id: 1, link: "/", element: <MapsMainPage /> }, 
   { id: 2, link: "/sign-in", element: <RegistrationPage /> }, 
   { id: 3, link: "/mapsmainpage", element: <MapsMainPage /> }, 
   { id: 4, link: "/eventsitem/:eventId", element: <EventCard /> }, 

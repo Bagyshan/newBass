@@ -16,7 +16,7 @@ const CreatPostPage = () => {
   const [newPost, setNewPost] = useState({
     title:"",
     description:"",
-    image:"https://www.techwebtopic.com/wp-content/uploads/2022/02/PNG-to-Vector-SVG-File.jpg",
+    image:"",
     longitude: lng,
     latitude: lat,
     event_date:"",
@@ -99,7 +99,7 @@ const CreatPostPage = () => {
   return (
     <div className="registration-container">
       <p className="description">Добавление мероприятия</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='createPostForm'>
         <input 
           name="title" 
           value={newPost.title}
@@ -112,7 +112,7 @@ const CreatPostPage = () => {
           placeholder="Описание мероприятия"
           className="phone-input"
           onChange={handleChangePost} />
-          <div className='typeOfEvent'>
+          {/* <div className='typeOfEvent'>
               <div className="radio-group">
                 <label>
                   <input
@@ -135,6 +135,26 @@ const CreatPostPage = () => {
                   Платно
                 </label>
               </div>
+            </div> */}
+            <div class="form_toggle">
+              <div class="form_toggle-item item-1">
+                <input id="fid-1" 
+                      type="radio"
+                      name="is_free"
+                      value='true'
+                      checked={newPost.is_free === true}
+                      onChange={handleChangePost}/>
+                <label for="fid-1">Бесплатно</label>
+              </div>
+              <div class="form_toggle-item item-2">
+                <input id="fid-2" 
+                      type="radio"
+                      name="is_free"
+                      value="false"
+                      checked={newPost.is_free === false}
+                      onChange={handleChangePost}/>
+                <label for="fid-2">Платно</label>
+              </div>
             </div>
             {!newPost.is_free && (<input 
               name='price' 
@@ -143,25 +163,28 @@ const CreatPostPage = () => {
               className="phone-input"
               onChange={handleChangePost} />)}
             <input 
-              className='postDate'
+              className='inputPostDate'
               name='event_date'
               value={newPost.event_date}
               type='date'
               onChange={handleChangePost}
             />
             <input 
-              className='postDate'
+              className='inputPostTime'
               name='event_time'
               value={newPost.event_time}
               type='time'
               onChange={handleChangePost}
             />
-            <input
-              type='file'
-              name="image"
-              accept="image/*" 
-              onChange={handleImageChange}
-            />
+            <label class="input-file">
+              <input
+                type='file'
+                name="image"
+                accept="image/*" 
+                onChange={handleImageChange}
+              />	
+	   	        <span>{newPost.image !== '' ? newPost.image.name : "Выберите изображение"}</span>
+ 	          </label>
         <select className='selectCategory' name='category' value={newPost.category} onChange={handleChangePost}>
           {categories.map((category, index) => (
             <option key={index} value={Number(category.id)}>
