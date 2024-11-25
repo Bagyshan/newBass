@@ -175,14 +175,7 @@ const MapsMainPage = () => {
     <div className='maps'>
       <MapContainer center={[42.87, 74.59]} zoom={13} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
         <button 
-          style={{
-            position:"absolute", 
-            zIndex:"1000", 
-            bottom:"20%", 
-            right: "5%", 
-            background:"none",
-            border:"none"
-          }}
+          className='gpsButton'
           onClick={(e) => {
             e.stopPropagation()
             setFlyToPosition(true)}}  
